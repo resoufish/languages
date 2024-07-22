@@ -1,6 +1,7 @@
 import Language from "@bot/structures/Language";
 import { GuildModal } from "@lib/types";
-import { Guild } from "discord.js";
+import { ClientUser, Guild } from "discord.js";
+import { NodeStats } from "shoukaku";
 
 export default class EnglishUs extends Language {
   constructor() {
@@ -99,6 +100,28 @@ export default class EnglishUs extends Language {
           `Live Player channel set to: <#${channel}>.`,
         CHANNEL_IS_NOT_TEXT: () =>
           "The selected channel is not a text channel.",
+      },
+      STATS: {
+        AUTHOR_NAME: (client: ClientUser, version: string) =>
+          `Statistics of ${client.username} | v${version}`,
+        DESC: (
+          cache_guilds: number,
+          guilds: number,
+          cache_users: number,
+          users: number,
+          used_memory: number,
+          total_memory: number,
+          unix_timestamp_time: number
+        ) => {
+          return `Servers > \`${cache_guilds} / ${guilds}\`\nUsers > \`${cache_users} / ${users}\`\n\nMemory > \`${used_memory} / ${total_memory}\`\nUptime > <t:${unix_timestamp_time}:R>`;
+        },
+        NODE_FIELD: (stats: NodeStats) => {
+          return `Players > \`${stats.players}\`\nActive Players > \`${
+            stats.playingPlayers
+          }\`\nUptime > <t:${Math.floor(
+            Date.now() / 1000 - stats.uptime / 1000
+          )}:R>\nMemory > \`${stats.memory.used} / ${stats.memory.free}\``;
+        },
       },
     };
   }

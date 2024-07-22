@@ -1,6 +1,8 @@
+import Kasumi from "@bot/structures/Client";
 import Language from "@bot/structures/Language";
 import { GuildModal } from "@lib/types";
-import { Guild } from "discord.js";
+import { ClientUser, Guild } from "discord.js";
+import { NodeStats } from "shoukaku";
 
 export default class RussianRu extends Language {
   constructor() {
@@ -91,6 +93,28 @@ export default class RussianRu extends Language {
         CHANNEL_SET: (channel: string) =>
           `Канал для Live Player'а установлен здесь: <#${channel}>.`,
         CHANNEL_IS_NOT_TEXT: () => "Выбранный канал не является текстовым.",
+      },
+      STATS: {
+        AUTHOR_NAME: (client: ClientUser, version: string) =>
+          `Статистика ${client.username} | v${version}`,
+        DESC: (
+          cache_guilds: number,
+          guilds: number,
+          cache_users: number,
+          users: number,
+          used_memory: number,
+          total_memory: number,
+          unix_timestamp_time: number
+        ) => {
+          return `Серверов > \`${cache_guilds} / ${guilds}\`\nПользователей > \`${cache_users} / ${users}\`\n\nПамять > \`${used_memory} / ${total_memory}\`\nВремя работы > <t:${unix_timestamp_time}:R>`;
+        },
+        NODE_FIELD: (stats: NodeStats) => {
+          return `Плееров > \`${stats.players}\`\nАктивных Плееров > \`${
+            stats.playingPlayers
+          }\`\nВремя работы > <t:${Math.floor(
+            Date.now() / 1000 - stats.uptime / 1000
+          )}:R>\nПамять > \`${stats.memory.used} / ${stats.memory.free}\``;
+        },
       },
     };
   }
