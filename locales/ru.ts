@@ -113,7 +113,9 @@ export default class RussianRu extends Language {
             stats.playingPlayers
           }\`\nВремя работы > <t:${Math.floor(
             Date.now() / 1000 - stats.uptime / 1000
-          )}:R>\nПамять > \`${stats.memory.used} / ${stats.memory.free}\``;
+          )}:R>\nПамять > \`${(stats.memory.used / 1024 / 1024).toFixed(
+            2
+          )} / ${(stats.memory.free / 1024 / 1024).toFixed(2)}\``;
         },
       },
     };

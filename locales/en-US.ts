@@ -120,7 +120,9 @@ export default class EnglishUs extends Language {
             stats.playingPlayers
           }\`\nUptime > <t:${Math.floor(
             Date.now() / 1000 - stats.uptime / 1000
-          )}:R>\nMemory > \`${stats.memory.used} / ${stats.memory.free}\``;
+          )}:R>\nMemory > \`${(stats.memory.used / 1024 / 1024).toFixed(
+            2
+          )} / ${(stats.memory.free / 1024 / 1024).toFixed(2)}\``;
         },
       },
     };
