@@ -10,20 +10,20 @@ export default class RussianRu extends Language {
 
     this.translations = {
       ERROR: (error: any) =>
-        `Произашла ошибка\nСообщение ошибки: \`${error.message}\``,
+        `Произошла ошибка\nСообщение ошибки: \`${error.message}\``,
+      UNKNOWN_SUBCOMMAND: () => "Неизвестная подкоманда.",
       PING: {
         PLEASE_WAIT: () => "Пожалуйста подождите...",
         MESSAGE: (ws: number, ping: number, db: number) =>
           `* Задержка WebSocket > \`${ws}ms\`\n` +
-          `* Задрежка > \`${ping}ms\`\n` +
+          `* Задержка > \`${ping}ms\`\n` +
           `* Задержка Datebase(Aria) > \`${db}ms\``,
       },
       SETTINGS: {
         GUILD_NOT_FOUND: () =>
-          "Не удалось найти сервер в базеданных, попробуйте позже..",
+          "Не удалось найти сервер в базе данных, попробуйте позже..",
         MUSIC_CONFIG_NOT_FOUND: () =>
-          "В базеданных не было найдено данных о конфигурации модуля: **музыка**\nОбратитесь на сервер поддержки.",
-        UNKNOWN_SUBCOMMAND: () => "Неизвестная подкоманда.",
+          "В базе данных не было найдено данных о конфигурации модуля: **музыка**\nОбратитесь на сервер поддержки.",
       },
       SETTINGS_EMBED: {
         EMBED_COLOR_SET: (hex: string) =>
@@ -83,7 +83,7 @@ export default class RussianRu extends Language {
           `Опция подсчета аналитики установлена на: ${
             enable === true ? "Включен." : "Выключен."
           }.`,
-        REMOVE_TRACKS: () => "Данные аналитики удалины.",
+        REMOVE_TRACKS: () => "Данные аналитики удалены.",
       },
       SETTINGS_LIVEPLAYER: {
         ENABLED_SET: (enable: boolean) =>
@@ -117,6 +117,73 @@ export default class RussianRu extends Language {
             2
           )} / ${(stats.memory.free / 1024 / 1024).toFixed(2)}\``;
         },
+      },
+      QUEUE: {
+        PLAYER_NOT_FOUND: "Игрок для этого сервера не найден.",
+        CLEAR_SUCCESS: "Очередь очищена.",
+        EMPTY: "Очередь пуста.",
+        TITLE: "Очередь для {guildName}",
+        LIST_PAGE: "Страница {page} из {pages}",
+        MOVE_SUCCESS: "Перемещен трек '{title}' с позиции {from} на {to}.",
+        REMOVE_SUCCESS: "Трек '{title}' удален из очереди.",
+        INVALID_INDEX: "Указан неверный индекс трека.",
+        SHUFFLE_SUCCESS: "Очередь перемешана.",
+        LOOP: {
+          SET: (type: "repeat" | "queue" | "none") => {
+            switch (type) {
+              case "repeat":
+                return "Повтор текущего трека.";
+              case "queue":
+                return "Повтор всей очереди.";
+              case "none":
+                return "Повтор отключен.";
+            }
+          },
+        },
+      },
+      PLAY: {
+        RESULT_NOT_FOUND: () => "Результаты не найдены.",
+        ERROR: () => "Произошла ошибка при поиске.",
+        EMPTY_RESULTS: () => "Результаты поиска пусты.",
+        QUEUE_LIMIT_REACHED: (max: number, excess: number) =>
+          `Очередь переполнена. Максимум ${max} треков. Добавлено ${excess} треков, лишние удалены.`,
+        ADDED_TRACK: (title: string, uri: string) =>
+          `Добавлен трек [${title}](${uri}) в очередь.`,
+        ADDED_PLAYLIST: (count: number) =>
+          `Добавлено ${count} треков в очередь.`,
+      },
+      VOLUME: {
+        PLAYER_NOT_FOUND: () => "Плеер не найден для этого сервера.",
+        VOLUME_SET: (volume: number) => `Громкость установлена на ${volume}.`,
+      },
+      STOP: {
+        NOT_PLAYING: "Проигрыватель в данный момент ничего не воспроизводит.",
+        STOPPED: "Воспроизведение остановлено.",
+      },
+      SKIP: {
+        NOT_PLAYING: "Проигрыватель в данный момент ничего не воспроизводит.",
+        SKIPPED: "Трек пропущен.",
+      },
+      SEEK: {
+        NOT_PLAYING: "Проигрыватель в данный момент ничего не воспроизводит.",
+        INVALID_POSITION: "Позиция вне диапазона.",
+        SUCCESS: (position: number) => `Перемотано на позицию ${position} секунд.`,
+      },
+      RESUME: {
+        NOT_PLAYING: "Проигрыватель в данный момент ничего не воспроизводит.",
+        RESUMED: "Воспроизведение возобновлено.",
+        ALREADY_RESUMED:
+          "Воспроизведение уже возобновлено. Используйте /pause для паузы.",
+      },
+      PAUSE: {
+        NOT_PLAYING: "Проигрыватель в данный момент ничего не воспроизводит.",
+        PAUSED: "Воспроизведение приостановлено.",
+        ALREADY_PAUSED:
+          "Воспроизведение уже приостановлено. Используйте /resume для возобновления.",
+      },
+      NOWPLAYING: {
+        NOT_PLAYING: "Проигрыватель в данный момент ничего не воспроизводит.",
+        CURRENT_TRACK: (title: string, url: string) => `Сейчас играет: [${title}](${url})`,
       },
     };
   }

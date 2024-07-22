@@ -125,6 +125,75 @@ export default class EnglishUs extends Language {
           )} / ${(stats.memory.free / 1024 / 1024).toFixed(2)}\``;
         },
       },
+      QUEUE: {
+        PLAYER_NOT_FOUND: "No player found for this guild.",
+        CLEAR_SUCCESS: "The queue has been cleared.",
+        EMPTY: "The queue is currently empty.",
+        TITLE: "Queue for {guildName}",
+        LIST_PAGE: "Page {page} of {pages}",
+        MOVE_SUCCESS: "Moved track '{title}' from position {from} to {to}.",
+        REMOVE_SUCCESS: "Removed track '{title}' from the queue.",
+        INVALID_INDEX: "Invalid track index provided.",
+        SHUFFLE_SUCCESS: "The queue has been shuffled.",
+        LOOP: {
+          SET: (type: "repeat" | "queue" | "none") => {
+            switch (type) {
+              case "repeat":
+                return "Repeat current track.";
+              case "queue":
+                return "Repeat entire queue.";
+              case "none":
+                return "Repeat is disabled.";
+            }
+          },
+        },
+      },
+      PLAY: {
+        RESULT_NOT_FOUND: () => "No results found.",
+        ERROR: () => "There was an error while searching.",
+        EMPTY_RESULTS: () => "Search results are empty.",
+        QUEUE_LIMIT_REACHED: (max: number, excess: number) =>
+          `Queue limit reached. Maximum is ${max} tracks. Added ${excess} tracks, excess removed.`,
+        ADDED_TRACK: (title: string, uri: string) =>
+          `Added [${title}](${uri}) to the queue.`,
+        ADDED_PLAYLIST: (count: number) =>
+          `Added ${count} tracks to the queue.`,
+      },
+      VOLUME: {
+        PLAYER_NOT_FOUND: () => "No player found for this guild.",
+        VOLUME_SET: (volume: number) => `Volume set to ${volume}.`,
+      },
+      STOP: {
+        NOT_PLAYING: "The player is not currently playing anything.",
+        STOPPED: "Playback has been stopped.",
+      },
+      SKIP: {
+        NOT_PLAYING: "The player is not currently playing anything.",
+        SKIPPED: "The track has been skipped.",
+      },
+      SEEK: {
+        NOT_PLAYING: "The player is not currently playing anything.",
+        INVALID_POSITION: "The position is out of range.",
+        SUCCESS: (position: number) =>
+          `Seeked to position ${position} seconds.`,
+      },
+      RESUME: {
+        NOT_PLAYING: "The player is not currently playing anything.",
+        RESUMED: "Playback has been resumed.",
+        ALREADY_RESUMED:
+          "Playback is already resumed. Use /pause to pause the playback.",
+      },
+      PAUSE: {
+        NOT_PLAYING: "The player is not currently playing anything.",
+        PAUSED: "Playback has been paused.",
+        ALREADY_PAUSED:
+          "Playback is already paused. Use /resume to resume the playback.",
+      },
+      NOWPLAYING: {
+        NOT_PLAYING: "The player is not currently playing anything.",
+        CURRENT_TRACK: (title: string, url: string) =>
+          `Currently playing: [${title}](${url})`,
+      },
     };
   }
 }
